@@ -23,23 +23,23 @@ import jakarta.servlet.http.HttpServletResponse;
 import success.coching.center.beans.Student;
 import success.coching.center.beans.User;
 import success.coching.center.repository.UserRepository;
-import success.coching.center.service.JobService;
+import success.coching.center.service.StudentService;
 import success.coching.center.service.SecurityService;
 
 @Controller
 public class AppController {
 	@Autowired
-	private JobService service;
+	private StudentService service;
 	
 	 	
 	@RequestMapping({"/","index"})
 	public String viewHomePagee(Model model, @Param("keyword") String keyword) {
-		List<Student> listProducts = service.listAll(keyword);
+		List<Student> listStudent = service.listAll(keyword);
 
-		int totaljob  = listProducts.size();
+		int totalstudent  = listStudent.size();
 
-		model.addAttribute("totaljob", totaljob);
-		model.addAttribute("listProducts", listProducts);
+		model.addAttribute("totalstudent", totalstudent);
+		model.addAttribute("listStudent", listStudent);
 		model.addAttribute("keyword", keyword);
 		
 		return "/index";
@@ -47,8 +47,8 @@ public class AppController {
 	
 	@RequestMapping("/index")
 	public String viewHomePage1(Model model, @Param("keyword") String keyword) {
-		List<Student> listProducts = service.listAll(keyword);
-		model.addAttribute("listProducts", listProducts);
+		List<Student> listStudent = service.listAll(keyword);
+		model.addAttribute("listStudent", listStudent);
 		model.addAttribute("keyword", keyword);
 		
 		return "/index";
@@ -56,25 +56,25 @@ public class AppController {
 	
 	
 	
-	@RequestMapping("/joblist")
+	@RequestMapping("/listStudent")
 	public String viewHomePage(Model model, @Param("keyword") String keyword) {
 
 		
-		List<Student> listProducts = service.listAll(keyword);
+		List<Student> listStudent = service.listAll(keyword);
 		
 		
-		int totaljob  = listProducts.size();
+		int totalStudent  = listStudent.size();
 
-		model.addAttribute("listProducts", listProducts);
+		model.addAttribute("listStudent", listStudent);
 		
 		
 		
-		model.addAttribute("totaljob", totaljob);
+		model.addAttribute("totalStudent", totalStudent);
 
 		
 		model.addAttribute("keyword", keyword);
 		
-		return "/joblist";
+		return "/listStudent";
 	}
 	
 	
@@ -82,25 +82,25 @@ public class AppController {
 	
 	@RequestMapping("/new")
 	public String showNewProductForm(Model model) {
-		Student product = new Student();
-		model.addAttribute("product", product);
+		Student student = new Student();
+		model.addAttribute("student", student);
 		
-		return "new_product";
+		return "new_student";
 	}
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String saveJob(@ModelAttribute("joblist") Student joblist) {
-		service.save(joblist);
+	public String saveJob(@ModelAttribute("listStudent") Student listStudent) {
+		service.save(listStudent);
 		
-		return "redirect:/joblist";
+		return "redirect:/listStudent";
 	}
 	
 	@RequestMapping("/edit/{id}")
 	public ModelAndView showEditProductForm(@PathVariable(name = "id") Long id) {
-		ModelAndView mav = new ModelAndView("edit_product");
+		ModelAndView mav = new ModelAndView("edit_student");
 		
-		Student product = service.get(id);
-		mav.addObject("product", product);
+		Student student = service.get(id);
+		mav.addObject("student", student);
 		
 		return mav;
 	}	
@@ -109,7 +109,7 @@ public class AppController {
 	public String deleteProduct(@PathVariable(name = "id") Long id) {
 		service.delete(id);
 		
-		return "redirect:/joblist";
+		return "redirect:/listStudent";
 	}
 	
 	///======================================================================

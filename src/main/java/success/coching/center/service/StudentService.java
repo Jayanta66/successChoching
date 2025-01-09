@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import success.coching.center.beans.Student;
-import success.coching.center.repository.JobRepository;
+import success.coching.center.repository.StudentRepository;
 
 @Service
-public class JobService {
+public class StudentService {
 	@Autowired
-	private JobRepository repo;
+	private StudentRepository repo;
 	
 	public List<Student> listAll() {
 				return repo.findAll();

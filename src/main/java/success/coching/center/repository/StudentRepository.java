@@ -8,9 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import success.coching.center.beans.Student;
 
 
-public interface JobRepository extends JpaRepository<Student, Long> {
+public interface StudentRepository extends JpaRepository<Student, Long> {
 		
-	@Query("SELECT j FROM Job j WHERE CONCAT(j.applicationid, ' ',j.jobdesignation, ' ', j.department, ' ', j.salary, ' ', j.location,' ', j.noticepriod,' ', j.jobtype,' ', j.jobdescription) LIKE %?1%")
+	@Query("SELECT s FROM Student s WHERE CONCAT(s.studentid, ' ',s.name, ' ', s.class, ' ', s.year, ' ', s.location,' ', s.tutionType,' ', s.fees,' ', s.feesStatus,' ',s.month) LIKE %?1%")
 	public List<Student> search(String keyword);
 	
 //	Optional<Product> findById(long id);
