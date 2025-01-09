@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import success.coching.center.beans.Job;
+import success.coching.center.beans.Student;
 import success.coching.center.repository.JobRepository;
 
 @Service
@@ -13,22 +13,22 @@ public class JobService {
 	@Autowired
 	private JobRepository repo;
 	
-	public List<Job> listAll() {
+	public List<Student> listAll() {
 				return repo.findAll();
 	}
 	
-	public List<Job> listAll(String keyword) {
+	public List<Student> listAll(String keyword) {
 		if (keyword != null) {
 			return repo.search(keyword);
 		}
 		return repo.findAll();
 	}
 	
-	public void save(Job product) {
+	public void save(Student product) {
 		repo.save(product);
 	}
 	
-	public Job get(Long id) {
+	public Student get(Long id) {
 		return repo.findById(id).get();
 	}
 	

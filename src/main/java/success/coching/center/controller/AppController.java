@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import success.coching.center.beans.Job;
+import success.coching.center.beans.Student;
 import success.coching.center.beans.User;
 import success.coching.center.repository.UserRepository;
 import success.coching.center.service.JobService;
@@ -34,7 +34,7 @@ public class AppController {
 	 	
 	@RequestMapping({"/","index"})
 	public String viewHomePagee(Model model, @Param("keyword") String keyword) {
-		List<Job> listProducts = service.listAll(keyword);
+		List<Student> listProducts = service.listAll(keyword);
 
 		int totaljob  = listProducts.size();
 
@@ -47,7 +47,7 @@ public class AppController {
 	
 	@RequestMapping("/index")
 	public String viewHomePage1(Model model, @Param("keyword") String keyword) {
-		List<Job> listProducts = service.listAll(keyword);
+		List<Student> listProducts = service.listAll(keyword);
 		model.addAttribute("listProducts", listProducts);
 		model.addAttribute("keyword", keyword);
 		
@@ -60,7 +60,7 @@ public class AppController {
 	public String viewHomePage(Model model, @Param("keyword") String keyword) {
 
 		
-		List<Job> listProducts = service.listAll(keyword);
+		List<Student> listProducts = service.listAll(keyword);
 		
 		
 		int totaljob  = listProducts.size();
@@ -82,14 +82,14 @@ public class AppController {
 	
 	@RequestMapping("/new")
 	public String showNewProductForm(Model model) {
-		Job product = new Job();
+		Student product = new Student();
 		model.addAttribute("product", product);
 		
 		return "new_product";
 	}
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String saveJob(@ModelAttribute("joblist") Job joblist) {
+	public String saveJob(@ModelAttribute("joblist") Student joblist) {
 		service.save(joblist);
 		
 		return "redirect:/joblist";
@@ -99,7 +99,7 @@ public class AppController {
 	public ModelAndView showEditProductForm(@PathVariable(name = "id") Long id) {
 		ModelAndView mav = new ModelAndView("edit_product");
 		
-		Job product = service.get(id);
+		Student product = service.get(id);
 		mav.addObject("product", product);
 		
 		return mav;
